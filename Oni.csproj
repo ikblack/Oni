@@ -178,6 +178,8 @@
     <Compile Include="Assets\Script\GUIControl.cs" />
     <Compile Include="Assets\Script\GameController.cs" />
     <Compile Include="Assets\Script\GamePlay\AttackTrigger.cs" />
+    <Compile Include="Assets\Script\GamePlay\ChoosePlayer.cs" />
+    <Compile Include="Assets\Script\GamePlay\LoadData.cs" />
     <Compile Include="Assets\Script\GamePlay\Monster.cs" />
     <Compile Include="Assets\Script\GamePlay\Mushroom.cs" />
     <Compile Include="Assets\Script\GamePlay\OniPlayerController.cs" />

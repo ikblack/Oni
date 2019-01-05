@@ -67,6 +67,7 @@ public class GamePanel :PanelBase
     {
         // GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().bIsjump = true;
         FlashButton.enabled = false;
+
     }
     public void OnRoll()
     {

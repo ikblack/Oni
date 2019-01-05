@@ -23,7 +23,7 @@ public class AsyncLoadScene : MonoBehaviour {
     public float setTime=10;
     // Use this for initialization
     void Start () {
-
+        PanelMgr.instance.OpenPanel<SharePanel>("");
         StartCoroutine(AsyncLoading());
     }
     IEnumerator AsyncLoading()

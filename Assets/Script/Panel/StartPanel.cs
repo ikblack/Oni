@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class StartPanel : PanelBase
 {
-
+    private GameObject startPanel;
     private Button startBtn;
+    private Button shareBtn;
+    private Button setBtn;
     GameObject obj;
-   // private Button quitBtn;
-   // private Button chooseBtn;
     #region 生命周期
     public override void Init(params object[] args)
     {
@@ -22,9 +22,10 @@ public class StartPanel : PanelBase
     {
         base.OnShowing();
         Transform skinTrans = skin.transform;
+        startPanel = skin.transform.gameObject; 
         startBtn = skinTrans.Find("StartBtn").GetComponent<Button>();
-        // quitBtn = skinTrans.Find("QuitBtn").GetComponent<Button>();
-        // chooseBtn = skinTrans.Find("ChooseBtn").GetComponent<Button>();
+        shareBtn = skinTrans.Find("ShareBtn").GetComponent<Button>();
+        setBtn = skinTrans.Find("SetBtn").GetComponent<Button>();
         if (GameObject.Find("Load"))
         {
             obj = GameObject.Find("Load").gameObject;
@@ -32,15 +33,13 @@ public class StartPanel : PanelBase
    
 
         startBtn.onClick.AddListener(OnStartClick);
-       // quitBtn.onClick.AddListener(OnQiutClick);
-       // chooseBtn.onClick.AddListener(OnChooseClick);
+        shareBtn.onClick.AddListener(OnShareClick);
+        setBtn.onClick.AddListener(OnSetClick);
     }
     #endregion
 
     public void OnStartClick()
     {
-        // Debug.Log("Start");
-
         if (obj)
         {
             obj.GetComponent<AsyncLoadScene>().FinishLoad();
@@ -48,5 +47,21 @@ public class StartPanel : PanelBase
         else
             Close();
         GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().Show();
+    }
+
+    public void OnShareClick()
+    {
+        
+        GameObject.FindWithTag("Canvas").gameObject.GetComponent<SharePanel>().Show();
+        startPanel.SetActive(false);
+    }
+    public void OnSetClick()
+    {
+        obj.GetComponent<AsyncLoadScene>().FinishLoad();
+        startPanel.SetActive(false);
+    }
+   public void Show()
+    {
+        startPanel.SetActive(true);
     }
 }

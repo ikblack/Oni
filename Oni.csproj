@@ -198,6 +198,7 @@
     <Compile Include="Assets\Script\Panel\PanelMgr.cs" />
     <Compile Include="Assets\Script\Panel\ResultPanel.cs" />
     <Compile Include="Assets\Script\Panel\Root.cs" />
+    <Compile Include="Assets\Script\Panel\SharePanel.cs" />
     <Compile Include="Assets\Script\Panel\StartPanel.cs" />
     <Compile Include="Assets\Script\Panel\TitlePanel.cs" />
     <Compile Include="Assets\Script\PlayerControl.cs" />

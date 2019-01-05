@@ -65,9 +65,9 @@ public class GamePanel :PanelBase
     }
     public void OnFlash()
     {
-        // GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().bIsjump = true;
+        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().RUN_TEMP_SPEED = 4.0f;
         FlashButton.enabled = false;
-
+        Invoke("OnFlashReset", Util.FlashCD);
     }
     public void OnRoll()
     {

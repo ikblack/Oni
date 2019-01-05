@@ -13,12 +13,16 @@ public enum PLAYERSTEP
 };
 
 public class OniPlayerController : MonoBehaviour {
+    // 初始位置
+    public Vector3 ini_pos ;
     // 移动的速度
     public float run_speed = 1.0f;
     // 移动速度的最大值 [m/sec].
     public const float RUN_SPEED_MAX = 2.0f;
+    // 移动速度的临时值 [m/sec].
+    public  float RUN_TEMP_SPEED = .0f;
     //错过时的重力值[m / sec ^ 2].
-	protected const float MISS_GRAVITY = 9.8f * 2.0f;
+    protected const float MISS_GRAVITY = 9.8f * 2.0f;
     // 移动速度的加速值 [m/sec^2].
     protected const float run_speed_add = 5f;
     // 移动速度的减速值 [m/sec^2].
@@ -30,21 +34,25 @@ public class OniPlayerController : MonoBehaviour {
     public bool bIsjump;
     protected bool is_running = true;
 
-    public float ScoreRate = 5f;
+    public float ScoreRate = 0.05f;
     public string Score;
     void Start()
     {
+        ini_pos = this.transform.localPosition;
         run_oriSpeed = run_speed;
         this.animator = this.GetComponentInChildren<Animator>();
         animator.SetTrigger("Run");
-        step = PLAYERSTEP.RUN;
+        step = PLAYERSTEP.NONE;
        
     }
-
+    void InitPlayerState()
+    {
+        this.step = PLAYERSTEP.NONE;
+        this.transform.localPosition = ini_pos;
+        //this.transform.localEulerAngles
+    }
     void Update()
     {
-      
-
         switch (step)
         {
             case PLAYERSTEP.NONE:
@@ -61,7 +69,17 @@ public class OniPlayerController : MonoBehaviour {
             case PLAYERSTEP.RUN:
                 /*****************************************/
                 this.run_speed += run_speed_add * Time.deltaTime;
-                this.run_speed = Mathf.Clamp(this.run_speed, 0.0f, PlayerControl.RUN_SPEED_MAX);
+                if (RUN_SPEED_MAX> RUN_TEMP_SPEED)
+                {
+                    this.run_speed = Mathf.Clamp(this.run_speed, 0.0f, RUN_SPEED_MAX);
+                }else
+                    this.run_speed = Mathf.Clamp(this.run_speed, 0.0f, RUN_SPEED_MAX);
+
+                if (this.run_speed>= RUN_TEMP_SPEED)
+                {
+                    RUN_TEMP_SPEED = 0;
+                }
+
                 Vector3 new_velocity = this.GetComponent<Rigidbody>().velocity;
 
                 new_velocity.x = run_speed;
@@ -100,7 +118,7 @@ public class OniPlayerController : MonoBehaviour {
             default:
                 break;
         }
-         Score = ((int)(ScoreRate * Time.time)).ToString();
+         Score = ((int)(ScoreRate * Time.time*this.transform.position.x)).ToString();
         NotificationCenter.Get().DispatchEvent("Score", Score);
 
         if (Input.GetKeyDown(KeyCode.Space)|bIsjump)
@@ -150,5 +168,13 @@ public class OniPlayerController : MonoBehaviour {
     public void StopRequest()
     {
         this.is_running = false;
+    }
+
+    private void OnGUI()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            step = PLAYERSTEP.RUN;
+        }
     }
 }

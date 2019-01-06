@@ -15,6 +15,7 @@ public class AsyncLoadScene : MonoBehaviour {
 
     private AsyncOperation operation;
     public GameObject[] img;
+    public GameObject ImgLoading;
     private int index;
     private int RecInt=1;
     float time;
@@ -23,7 +24,7 @@ public class AsyncLoadScene : MonoBehaviour {
     public float setTime=10;
     // Use this for initialization
     void Start () {
-        PanelMgr.instance.OpenPanel<SharePanel>("");
+      //  PanelMgr.instance.OpenPanel<SharePanel>("");
         StartCoroutine(AsyncLoading());
     }
     IEnumerator AsyncLoading()
@@ -63,7 +64,7 @@ public class AsyncLoadScene : MonoBehaviour {
     {
         time = time + Time.deltaTime;
         newtime = newtime + Time.deltaTime;
-        if (time > 0.5)
+        if (time > 1)
         {
             Changed();
             time = 0;
@@ -98,6 +99,7 @@ public class AsyncLoadScene : MonoBehaviour {
             for (int i = 0; i < img.Length; i++)
             {
                 img[i].SetActive(false);
+                ImgLoading.SetActive(false);
                 PanelMgr.instance.OpenPanel<StartPanel>("");
             }
         }

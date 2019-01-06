@@ -6,7 +6,7 @@ public class ChoosePlayer : MonoBehaviour {
 
     public GameObject[] players;
     public static ChoosePlayer instance;
-    void Start () {
+    void Awake () {
         instance = this;
        
 	}
@@ -31,14 +31,14 @@ public class ChoosePlayer : MonoBehaviour {
                 players[i].SetActive(false);
         }
     }
-
-    public void OnGUI()
+    public void HideAllPlayer()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        foreach (GameObject item in players)
         {
-            ShowPlayer(0);
+            item.SetActive(false);
         }
-    }
 
+    }
+  
 
 }

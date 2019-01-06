@@ -16,11 +16,14 @@ public class Monster : Prop {
     // 移动速度的减速值 [m/sec^2].
     protected const float run_speed_sub = 2.50f * 1.0f;
 
+    public Vector3 init_pos;
+
     private float run_oriSpeed;
     public override void Start()
     {
         base.Start();
         run_oriSpeed = run_speed;
+        init_pos = this.gameObject.transform.localPosition;
     }
     public override void Update()
     {
@@ -39,9 +42,11 @@ public class Monster : Prop {
         this.GetComponent<Rigidbody>().velocity = new_velocity;
     }
 
-   void ReStart()
+   public void ReStart()
     {
         run_speed=run_oriSpeed;
+        this.transform.localPosition = init_pos;
     }
+
   
-}
+    }

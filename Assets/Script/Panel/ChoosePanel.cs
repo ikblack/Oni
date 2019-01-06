@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ChoosePanel : PanelBase {
 
-    private Button oneBtn;
+    private Button nextBut;
     private Button twoBtn;
     private Button returnBtn;
 
+    int index=1;
     #region 生命周期
     public override void Init(params object[] args)
     {
@@ -20,28 +21,30 @@ public class ChoosePanel : PanelBase {
     {
         base.OnShowing();
         Transform skinTrans = skin.transform;
-        oneBtn = skinTrans.Find("OneBtn").GetComponent<Button>();
-        twoBtn = skinTrans.Find("TwoBtn").GetComponent<Button>();
+        nextBut = skinTrans.Find("NextBtn").GetComponent<Button>();
+       // twoBtn = skinTrans.Find("ReturnBut").GetComponent<Button>();
         returnBtn= skinTrans.Find("ReturnBtn").GetComponent<Button>();
 
-        oneBtn.onClick.AddListener(OnOneClick);
-        twoBtn.onClick.AddListener(OnTwoClick);
+        nextBut.onClick.AddListener(OnNextClick);
         returnBtn.onClick.AddListener(OnReturnClick);
+
+        ChoosePlayer.instance.ShowPlayer(0);
     }
     #endregion
 
 
-    public void OnOneClick()
+    public void OnNextClick()
     {
+        ChoosePlayer.instance.ShowPlayer(index);
+        index++;
     }
 
-    public void OnTwoClick()
-    {
-    }
+   
     public void OnReturnClick()
     {
+        GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
+        ChoosePlayer.instance.HideAllPlayer();
         Close();
-        PanelMgr.instance.OpenPanel<TitlePanel>("");
     }
 }
 

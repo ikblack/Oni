@@ -9,8 +9,10 @@ public class GamePanel :PanelBase
     private Button FlashButton;
     private Button RollButton;
     private Button ReturnButton;
+    private Button RestartButton;
     private GameObject CanvasPanel;
-    private Image MaskP;
+    private GameObject MaskP;
+    private Image StartMask;
     private Text Score;
     private float CurrentTimer;
     private float LastTimer;
@@ -32,9 +34,10 @@ public class GamePanel :PanelBase
         RollButton = skinTrans.Find("RollButton").GetComponent<Button>();
         ReturnButton = skinTrans.Find("ReturnButton").GetComponent<Button>();
         Score = skinTrans.Find("Score").GetChild(0).GetComponent<Text>();
-        MaskP= skinTrans.Find("Mask").GetChild(0).GetComponent<Image>();
+        MaskP= skinTrans.Find("Mask").gameObject;
+        RestartButton = skinTrans.Find("Mask/RestartBtn").GetComponent<Button>();
+        StartMask = skinTrans.Find("StartMask").GetComponent<Image>();
 
-       
 
         CanvasPanel.gameObject.SetActive(true);
         NotificationCenter.Get().AddEventListener("Score", ShowScore);
@@ -42,8 +45,9 @@ public class GamePanel :PanelBase
         FlashButton.onClick.AddListener(OnFlash);
         RollButton.onClick.AddListener(OnRoll);
         ReturnButton.onClick.AddListener(OnReturn);
-
-        MaskP.enabled = false;
+        RestartButton.onClick.AddListener(Restart);
+            
+        MaskP.SetActive(false);
     }
     #endregion
     public void ShowScore(Notification notification)
@@ -79,7 +83,11 @@ public class GamePanel :PanelBase
     {
         // Close();
         CanvasPanel.gameObject.SetActive(false);
+      
         PanelMgr.instance.OpenPanel<StartPanel>("");
+        GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
+        GameController._gameInstance.RestartGame();
+        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().step = PLAYERSTEP.STOP;
     }
     public void Show()
     {
@@ -97,15 +105,32 @@ public class GamePanel :PanelBase
     }
     public void ShowMask()
     {
-        MaskP.enabled = true;
+        MaskP.SetActive(true);
         FlashButton.interactable = false;
         RollButton.interactable = false;
     }
 
     public void HideMask()
     {
-        MaskP.enabled = false;
+        StartMask.gameObject. SetActive(false);
+        MaskP.SetActive(false) ;
         FlashButton.interactable = true;
         RollButton.interactable = true;
+    }
+
+    public void Restart()
+    {
+        GameController._gameInstance.RestartGame();
+        FadeControl.get().ui_image = StartMask;
+        FadeControl.get().fade(1.0f, new Color(0.0f, 0.0f, 0.0f, 0.0f), new Color(0.0f, 0.0f, 0.0f, 1.0f));
+        Invoke("Delay",1.25f);
+
+    }
+    public void Delay()
+    {
+        
+        FadeControl.get().gameObject.SetActive(false);
+        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().step = PLAYERSTEP.RUN;
+         HideMask();
     }
 }

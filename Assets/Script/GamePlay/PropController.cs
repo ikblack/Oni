@@ -120,6 +120,6 @@ public class PropController : MonoBehaviour {
         appear_front = SpawnNormalLenghth[(int)Random.Range(0, SpawnNormalLenghth.Length-1)];
         appear_position.x += appear_front;
         obj.transform.localPosition = appear_position;
-        obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, 0, 0);
+        obj.transform.localPosition = new Vector3(obj.transform.localPosition.x, -0.3f, -3);
     }
 }

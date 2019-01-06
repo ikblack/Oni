@@ -7,7 +7,7 @@ public class FloorControl : MonoBehaviour {
 	private GameObject		main_camera = null;
 
 	// 初始位置
-	private Vector3	initial_position;
+	public Vector3	initial_position;
 
 	// 地面的宽度（X方向）
 	public	const float	WIDTH = 10.0f*2.20f;

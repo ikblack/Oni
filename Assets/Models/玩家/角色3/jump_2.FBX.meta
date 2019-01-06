@@ -247,7 +247,7 @@ ModelImporter:
     400238: "\uE814\uE812"
     4300000: "\u5BF9\u8C61021"
     4300002: "\u5BF9\u8C61022"
-    7400000: JumpDown
+    7400000: JumpUP
     9500000: //RootNode
     13700000: "\u5BF9\u8C61021"
     13700002: "\u5BF9\u8C61022"
@@ -275,7 +275,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: JumpDown
+      name: JumpUP
       takeName: Take 001
       firstFrame: 0
       lastFrame: 1

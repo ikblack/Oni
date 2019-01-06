@@ -52,27 +52,54 @@ public class GameController : MonoBehaviour
     {
         _gameInstance = this;
         //HideInStart();
-       // InitGame();
-       // ShowInStart();
+        // InitGame();
+        // ShowInStart();
         //PasuGame();
+        Player = GameObject.FindGameObjectWithTag("Player").gameObject;
     }
 
 
     void Update()
     {
-
-       Player= GameObject.FindGameObjectWithTag("Player").gameObject;
+        if (!Player)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+        }
+    
     
     }
     public void InitGame()
     {
-        playerControl.gameObject.GetComponent<PlayerControl>().enabled=true;
+      //playerControl.gameObject.GetComponent<PlayerControl>().enabled=true;
         cameraCon.gameObject.GetComponent<CameraControl>().enabled = true;
         sceneCon.gameObject.GetComponent<SceneControl>().enabled = true;
 
         foreach (FloorControl item in floors)
         {
             item.gameObject.GetComponent<FloorControl>().enabled = true;
+        }
+        
+    }
+
+
+    public void RestartGame()
+    {
+        Player.GetComponent<OniPlayerController>().InitPlayerState();
+        foreach (FloorControl item in floors)
+        {
+            item.gameObject.transform.localPosition =item.initial_position;
+        }
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject item in objs)
+        {
+            if (item.GetComponent<Mushroom>()&&item.GetComponent<Mushroom>().eType== EType.PROP)
+            {
+                Destroy(item);
+            }
+            if (item.GetComponent<Monster>()&&item.GetComponent<Monster>().eType == EType.ENEMY)
+            {
+                item.GetComponent<Monster>().ReStart();
+            }
         }
     }
     public void StartGame()
@@ -82,9 +109,9 @@ public class GameController : MonoBehaviour
     }
     public void PasuGame()
     {
-        playerControl.gameObject.GetComponent<PlayerControl>().enabled = false;
+        playerControl.gameObject.GetComponent<OniPlayerController>().enabled = false;
         cameraCon.gameObject.GetComponent<CameraControl>().enabled = false;
-        sceneCon.gameObject.GetComponent<SceneControl>().enabled = true;
+      
 
         foreach (FloorControl item in floors)
         {
@@ -133,5 +160,14 @@ public class GameController : MonoBehaviour
     public void QiutGame()
     {
         Application.Quit();
+    }
+
+    private void OnGUI()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            RestartGame();
+        }
+       
     }
 }

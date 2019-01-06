@@ -45,19 +45,24 @@ public class StartPanel : PanelBase
             obj.GetComponent<AsyncLoadScene>().FinishLoad();
         }
         else
-            Close();
-        GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().Show();
+        {
+            GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().Show();
+            startPanel.SetActive(false);
+        }
+           
+
     }
 
     public void OnShareClick()
     {
-        
-        GameObject.FindWithTag("Canvas").gameObject.GetComponent<SharePanel>().Show();
+        PanelMgr.instance.OpenPanel<SharePanel>("");
+        //GameObject.FindWithTag("Canvas").gameObject.GetComponent<SharePanel>().Show();
         startPanel.SetActive(false);
     }
     public void OnSetClick()
     {
-        obj.GetComponent<AsyncLoadScene>().FinishLoad();
+        // obj.GetComponent<AsyncLoadScene>().FinishLoad();
+        PanelMgr.instance.OpenPanel<ChoosePanel>("");
         startPanel.SetActive(false);
     }
    public void Show()

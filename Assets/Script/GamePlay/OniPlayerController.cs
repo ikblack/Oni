@@ -27,6 +27,13 @@ public class OniPlayerController : MonoBehaviour {
     protected const float run_speed_add = 5f;
     // 移动速度的减速值 [m/sec^2].
     protected const float run_speed_sub = 2.50f * 1.0f;
+    //跳跃高度
+    public float jump_height = 1.5f;
+    //跳跃高度
+    public float jump_weight = 2.5f;
+
+    public GameObject triggerJump;
+
     private float run_oriSpeed;
     public GameObject DieBox;
     public PLAYERSTEP step;
@@ -34,7 +41,7 @@ public class OniPlayerController : MonoBehaviour {
     public bool bIsjump;
     protected bool is_running = true;
 
-    public float ScoreRate = 0.05f;
+    public float ScoreRate = 0.005f;
     public string Score;
     void Start()
     {
@@ -42,10 +49,10 @@ public class OniPlayerController : MonoBehaviour {
         run_oriSpeed = run_speed;
         this.animator = this.GetComponentInChildren<Animator>();
         animator.SetTrigger("Run");
-        step = PLAYERSTEP.NONE;
+        step = PLAYERSTEP.RUN;
        
     }
-    void InitPlayerState()
+   public  void InitPlayerState()
     {
         this.step = PLAYERSTEP.NONE;
         this.transform.localPosition = ini_pos;
@@ -96,20 +103,21 @@ public class OniPlayerController : MonoBehaviour {
             case PLAYERSTEP.STOP:
                 /*******************************************/
 
+                this.GetComponent<Rigidbody>().velocity = Vector3.zero; ;
                 /*******************************************/
                 break;
             case PLAYERSTEP.JUMP:
                 /*******************************************/
                
-                Vector3 velocity = this.GetComponent<Rigidbody>().velocity;
+                //Vector3 velocity = this.GetComponent<Rigidbody>().velocity;
 
-                float jump_height = 2.5f;
+                //float jump_height = 1.5f;
 
-                velocity.x = 2.5f;
-                velocity.y = Mathf.Sqrt(MISS_GRAVITY * jump_height);
-                velocity.z = 0.0f;
+                //velocity.x = 2.5f;
+                //velocity.y = Mathf.Sqrt(MISS_GRAVITY * jump_height);
+                //velocity.z = 0.0f;
 
-                this.GetComponent<Rigidbody>().velocity = velocity;
+                //this.GetComponent<Rigidbody>().velocity = velocity;
                 step = PLAYERSTEP.NONE;
                 Invoke("JumpEnd", 1f);
                 bIsjump = false;
@@ -118,7 +126,7 @@ public class OniPlayerController : MonoBehaviour {
             default:
                 break;
         }
-         Score = ((int)(ScoreRate * Time.time*this.transform.position.x)).ToString();
+         Score = ((int)(ScoreRate * this.transform.position.x)).ToString();
         NotificationCenter.Get().DispatchEvent("Score", Score);
 
         if (Input.GetKeyDown(KeyCode.Space)|bIsjump)
@@ -136,6 +144,19 @@ public class OniPlayerController : MonoBehaviour {
     void JumpEnd()
     {
         step = PLAYERSTEP.RUN;
+    }
+
+    void Roll(string msg)
+    {
+        Vector3 velocity = this.GetComponent<Rigidbody>().velocity;
+
+        triggerJump.SetActive(true);
+        this.gameObject. GetComponent<CapsuleCollider>().enabled = false;
+        velocity.x = jump_weight;
+        velocity.y = Mathf.Sqrt(MISS_GRAVITY * jump_height);
+        velocity.z = 0.0f;
+
+        this.GetComponent<Rigidbody>().velocity = velocity;
     }
 
     void OnCollisionEnter(Collision other)
@@ -176,5 +197,6 @@ public class OniPlayerController : MonoBehaviour {
         {
             step = PLAYERSTEP.RUN;
         }
+        
     }
 }

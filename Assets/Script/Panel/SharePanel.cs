@@ -21,19 +21,21 @@ public class SharePanel : PanelBase {
         Transform skinTrans = skin.transform;
         sharePanel = skin.transform.gameObject;
         returnBut = skin.transform.Find("ShareBut").GetComponent<Button>();
-        sharePanel.SetActive(false);
+     //   sharePanel.SetActive(false);
         returnBut.onClick.AddListener(Return);
     }
     #endregion
 
     public void Return()
     {
-        sharePanel.SetActive(false);
         GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
+        Close();
+     //   sharePanel.SetActive(false);
+     
     }
     public void Show()
     {
-        sharePanel.SetActive(true);
+     //   sharePanel.SetActive(true);
     }
 
 }

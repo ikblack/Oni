@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{607E7C59-123F-11E9-82CC-54CBBD7384E9}</ProjectGuid>
+    <ProjectGuid>{2A0B7C07-42D5-E639-CCC2-D4289619CAC2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -80,9 +80,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="oni.CSharp.Plugins.csproj">
-      <Project>{880B5059-18E4-7C22-1166-9B80A268539D}</Project>
-      <Name>oni.CSharp.Plugins</Name>
+    <ProjectReference Include="Oni.CSharp.Plugins.csproj">
+      <Project>{8B4E08DA-E6B0-EF7A-7ED8-4C99F347BCD8}</Project>
+      <Name>Oni.CSharp.Plugins</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -166,7 +166,7 @@
     <Compile Include="Assets\Misc\Debug\ClipboardHelper.cs" />
     <Compile Include="Assets\Misc\Debug\DebugPrint.cs" />
     <Compile Include="Assets\Misc\Debug\DebugWindow.cs" />
-    <Compile Include="Assets\OniPlayerController.cs" />
+    <Compile Include="Assets\RoleLoad.cs" />
     <Compile Include="Assets\Script\AnimatedTextureExtendedUV.cs" />
     <Compile Include="Assets\Script\AttackColliderControl.cs" />
     <Compile Include="Assets\Script\AudioManager.cs" />
@@ -176,12 +176,16 @@
     <Compile Include="Assets\Script\GUIControl.cs" />
     <Compile Include="Assets\Script\GameController.cs" />
     <Compile Include="Assets\Script\GamePlay\AttackTrigger.cs" />
+    <Compile Include="Assets\Script\GamePlay\ChoosePlayer.cs" />
+    <Compile Include="Assets\Script\GamePlay\LoadData.cs" />
     <Compile Include="Assets\Script\GamePlay\Monster.cs" />
     <Compile Include="Assets\Script\GamePlay\Mushroom.cs" />
+    <Compile Include="Assets\Script\GamePlay\OniPlayerController.cs" />
     <Compile Include="Assets\Script\GamePlay\Prop.cs" />
     <Compile Include="Assets\Script\GamePlay\PropController.cs" />
     <Compile Include="Assets\Script\GamePlay\TouchController.cs" />
     <Compile Include="Assets\Script\GamePlay\Util.cs" />
+    <Compile Include="Assets\Script\GamePlay\WarningTrigger.cs" />
     <Compile Include="Assets\Script\Level\AsyncLoadScene.cs" />
     <Compile Include="Assets\Script\LevelControl.cs" />
     <Compile Include="Assets\Script\OniControl.cs" />
@@ -194,6 +198,7 @@
     <Compile Include="Assets\Script\Panel\PanelMgr.cs" />
     <Compile Include="Assets\Script\Panel\ResultPanel.cs" />
     <Compile Include="Assets\Script\Panel\Root.cs" />
+    <Compile Include="Assets\Script\Panel\SharePanel.cs" />
     <Compile Include="Assets\Script\Panel\StartPanel.cs" />
     <Compile Include="Assets\Script\Panel\TitlePanel.cs" />
     <Compile Include="Assets\Script\PlayerControl.cs" />
@@ -212,7 +217,6 @@
     <Compile Include="Assets\UnityChan\Scripts\IdleChanger.cs" />
     <Compile Include="Assets\UnityChan\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
-    <Compile Include="Assets\WarningTrigger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\EasyTouchBundle\EasyTouch\RealseNotes.txt" />

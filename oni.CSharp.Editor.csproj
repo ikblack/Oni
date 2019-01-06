@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{29FB6467-C91D-5205-AA77-BC5707618839}</ProjectGuid>
+    <ProjectGuid>{7DA56F5A-49BE-E7D1-2749-1013793E6454}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -122,13 +122,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="oni.CSharp.Plugins.csproj">
-      <Project>{880B5059-18E4-7C22-1166-9B80A268539D}</Project>
-      <Name>oni.CSharp.Plugins</Name>
+    <ProjectReference Include="Oni.CSharp.Plugins.csproj">
+      <Project>{8B4E08DA-E6B0-EF7A-7ED8-4C99F347BCD8}</Project>
+      <Name>Oni.CSharp.Plugins</Name>
     </ProjectReference>
-    <ProjectReference Include="oni.CSharp.csproj">
-      <Project>{607E7C59-123F-11E9-82CC-54CBBD7384E9}</Project>
-      <Name>oni.CSharp</Name>
+    <ProjectReference Include="Oni.CSharp.csproj">
+      <Project>{2A0B7C07-42D5-E639-CCC2-D4289619CAC2}</Project>
+      <Name>Oni.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

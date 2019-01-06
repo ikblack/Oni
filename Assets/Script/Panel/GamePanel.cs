@@ -88,6 +88,7 @@ public class GamePanel :PanelBase
         GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
         GameController._gameInstance.RestartGame();
         GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().step = PLAYERSTEP.STOP;
+        Camera.main.gameObject.GetComponent<CameraControl>().enabled = false;
     }
     public void Show()
     {

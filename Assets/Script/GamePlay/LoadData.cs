@@ -20,7 +20,7 @@ public class LoadData : MonoBehaviour {
     public void SaveIdData(int index)
     {
         PlayerPrefs.SetInt("Role", index);
-        Debug.Log(index);
+        //Debug.Log(index);
     }
 
     public void SavePlayerData(int PlayerID, int Score, int Rank)

@@ -7,8 +7,20 @@ public class RoleLoad : MonoBehaviour
     public GameObject Player1;
     public GameObject Player2;
     public GameObject Player3;
+    public static RoleLoad instance;
     // Use this for initialization
     void Awake()
+    {
+        Load();
+        instance = this;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+   public void Load()
     {
         int RoleID = PlayerPrefs.GetInt("Role");
         if (RoleID == 0)
@@ -18,7 +30,7 @@ public class RoleLoad : MonoBehaviour
             Player2.SetActive(false);
             Player3.SetActive(false);
             Player1.tag = "Player";
-            Player2.tag ="OniYama";
+            Player2.tag = "OniYama";
             Player3.tag = "OniYama";
         }
         else if (RoleID == 1)
@@ -41,11 +53,5 @@ public class RoleLoad : MonoBehaviour
             Player2.tag = "OniYama";
             Player3.tag = "Player";
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

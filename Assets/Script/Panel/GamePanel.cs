@@ -69,13 +69,13 @@ public class GamePanel :PanelBase
     }
     public void OnFlash()
     {
-        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().RUN_TEMP_SPEED = 4.0f;
+        TagMark.instance.Player.gameObject .GetComponent<OniPlayerController>().RUN_TEMP_SPEED = 4.0f;
         FlashButton.enabled = false;
         Invoke("OnFlashReset", Util.FlashCD);
     }
     public void OnRoll()
     {
-        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().bIsjump=true;
+        TagMark.instance.Player.gameObject.GetComponent<OniPlayerController>().bIsjump=true;
         RollButton.enabled = false;
         Invoke("OnRollReset",Util.RollCD);
     }
@@ -87,8 +87,8 @@ public class GamePanel :PanelBase
         PanelMgr.instance.OpenPanel<StartPanel>("");
         GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
         GameController._gameInstance.RestartGame();
-        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().step = PLAYERSTEP.STOP;
-        Camera.main.gameObject.GetComponent<CameraControl>().enabled = false;
+        TagMark.instance.Player.gameObject.GetComponent<OniPlayerController>().GetComponent<OniPlayerController>().step = PLAYERSTEP.STOP;
+       // Camera.main.gameObject.GetComponent<CameraControl>().enabled = false;
     }
     public void Show()
     {

@@ -167,6 +167,7 @@ public class OniPlayerController : MonoBehaviour {
             DieBox.gameObject.SetActive(true);
             animator.SetTrigger("Die");
             GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().ShowMask();
+            PlayerPrefs.SetInt("Dis",(int)(this.transform.localPosition.x));
         }
         this.run_speed = 0;
       

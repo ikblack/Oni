@@ -49,10 +49,10 @@ public class StartPanel : PanelBase
             GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().Show();
             startPanel.SetActive(false);
         }
-        if (RoleLoad.instance)
+        //if (RoleLoad.instance)
         {
             RoleLoad.instance.Load();
-            Camera.main.gameObject.GetComponent<CameraControl>().enabled = true;
+        //  Camera.main.gameObject.GetComponent<CameraControl>().enabled = true;
         }
 
     }

@@ -36,8 +36,8 @@ public class GameController : MonoBehaviour
     public CameraControl cameraCon;
     public SceneControl sceneCon;
 
-   
 
+    public GameObject Monster;
     private GameObject Player;
     
    
@@ -101,6 +101,17 @@ public class GameController : MonoBehaviour
                 item.GetComponent<Monster>().ReStart();
             }
         }
+        Monster.GetComponent<Monster>(). ReStart();
+        Player.GetComponent<OniPlayerController>().Run();
+    }
+
+    public void MonsterStop()
+    {
+        Monster.GetComponent<Monster>().bIsRun = false;
+    }
+    public void MonsterRun()
+    {
+        Monster.GetComponent<Monster>().bIsRun = true;
     }
     public void StartGame()
     {

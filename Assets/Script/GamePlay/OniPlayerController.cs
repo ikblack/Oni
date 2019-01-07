@@ -9,7 +9,8 @@ public enum PLAYERSTEP
     NONE = -1,
     RUN = 0,        // 奔跑 游戏中
     STOP,           // 停止 显示
-    JUMP
+    JUMP,
+    DIE
 };
 
 public class OniPlayerController : MonoBehaviour {
@@ -34,7 +35,7 @@ public class OniPlayerController : MonoBehaviour {
 
     public GameObject triggerJump;
 
-    private float run_oriSpeed;
+    public float run_oriSpeed;
     public GameObject DieBox;
     public PLAYERSTEP step;
     public Animator animator;
@@ -64,23 +65,25 @@ public class OniPlayerController : MonoBehaviour {
         {
             case PLAYERSTEP.NONE:
                 Vector3 vel = this.GetComponent<Rigidbody>().velocity;
-
+               
               //  float height = 1.5f;
 
-              //  vel.x = 2.5f;
-               // vel.y = -Mathf.Sqrt(MISS_GRAVITY )/2;
-              //  vel.z = 0.0f;
+                //  vel.x = 2.5f;
+                // vel.y = -Mathf.Sqrt(MISS_GRAVITY )/2;
+                //  vel.z = 0.0f;
 
                 this.GetComponent<Rigidbody>().velocity =vel;
                 break;
             case PLAYERSTEP.RUN:
                 /*****************************************/
+               
+                animator.SetTrigger("Run");
                 this.run_speed += run_speed_add * Time.deltaTime;
                 if (RUN_SPEED_MAX> RUN_TEMP_SPEED)
                 {
                     this.run_speed = Mathf.Clamp(this.run_speed, 0.0f, RUN_SPEED_MAX);
                 }else
-                    this.run_speed = Mathf.Clamp(this.run_speed, 0.0f, RUN_SPEED_MAX);
+                    this.run_speed = Mathf.Clamp(this.run_speed, 0.0f, RUN_TEMP_SPEED);
 
                 if (this.run_speed>= RUN_TEMP_SPEED)
                 {
@@ -97,7 +100,7 @@ public class OniPlayerController : MonoBehaviour {
                   //  new_velocity.y = 0.0f;
                 }
                 this.GetComponent<Rigidbody>().velocity = new_velocity;
-                //Debug.Log("11111111");
+              
                 /*******************************************/
                 break;
             case PLAYERSTEP.STOP:
@@ -119,9 +122,14 @@ public class OniPlayerController : MonoBehaviour {
 
                 //this.GetComponent<Rigidbody>().velocity = velocity;
                 step = PLAYERSTEP.NONE;
-                Invoke("JumpEnd", 1f);
+                Invoke("JumpEnd", 2f);
                 bIsjump = false;
                 /*******************************************/
+                break;
+            case PLAYERSTEP.DIE:
+                animator.SetTrigger("Die");
+                this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                this.step = PLAYERSTEP.NONE;
                 break;
             default:
                 break;
@@ -134,13 +142,18 @@ public class OniPlayerController : MonoBehaviour {
             animator.SetTrigger("Roll");
             Vector3 pos = this.gameObject.transform.position;
             //    this.run_speed = 0;
-            animator.SetTrigger("Run");
+           // animator.SetTrigger("Run");
             this.transform.position = pos;
             this.step = PLAYERSTEP.JUMP;
         }
 
     }
-
+    public void Run()
+    {
+        animator.SetBool("IsRun",true);
+        animator.SetTrigger("Run");
+       
+    }
     void JumpEnd()
     {
         step = PLAYERSTEP.RUN;
@@ -150,39 +163,48 @@ public class OniPlayerController : MonoBehaviour {
     {
         Vector3 velocity = this.GetComponent<Rigidbody>().velocity;
 
-        triggerJump.SetActive(true);
-        this.gameObject. GetComponent<CapsuleCollider>().enabled = false;
+        //triggerJump.SetActive(true);
+        //this.gameObject. GetComponent<CapsuleCollider>().enabled = false;
         velocity.x = jump_weight;
         velocity.y = Mathf.Sqrt(MISS_GRAVITY * jump_height);
         velocity.z = 0.0f;
 
         this.GetComponent<Rigidbody>().velocity = velocity;
     }
-
+    void OnCapUp()
+    {
+        this.gameObject.GetComponent<CapsuleCollider>().center = new Vector3(0, 1.6f, 0);
+    }
+    void OnCapDown()
+    {
+        this.gameObject.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.8f, 0);
+    }
     void OnCollisionEnter(Collision other)
     {
 
         if (other.gameObject.tag == "Enemy")
         {
-            DieBox.gameObject.SetActive(true);
-            animator.SetTrigger("Die");
+            // DieBox.gameObject.SetActive(true);
+            this.step = PLAYERSTEP.DIE;
+            //animator.SetTrigger("Die");
             GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().ShowMask();
             PlayerPrefs.SetInt("Dis",(int)(this.transform.localPosition.x));
+            this.run_speed = 0;
+            
         }
-        this.run_speed = 0;
       
         //this.OnCollisionStay(other);
     }
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Enemy")
+        /*if (col.gameObject.tag == "Enemy")
         {
-            DieBox.gameObject.SetActive(true);
-            animator.SetTrigger("Die");
+           // DieBox.gameObject.SetActive(true);
+           // animator.SetTrigger("Die");
         }
         this.run_speed = 0;
         StopRequest();
-        //  this.is_running = true;
+        //  this.is_running = true;*/
 
     }
 

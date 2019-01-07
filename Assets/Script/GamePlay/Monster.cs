@@ -19,6 +19,8 @@ public class Monster : Prop {
     public Vector3 init_pos;
 
     private float run_oriSpeed;
+
+    public bool bIsRun=true;
     public override void Start()
     {
         base.Start();
@@ -28,18 +30,26 @@ public class Monster : Prop {
     public override void Update()
     {
         base.Update();
-        this.run_speed += run_speed_add * Time.deltaTime;
-        this.run_speed = Mathf.Clamp(this.run_speed, 0.0f, PlayerControl.RUN_SPEED_MAX);
-        Vector3 new_velocity = this.GetComponent<Rigidbody>().velocity;
-
-        new_velocity.x = run_speed;
-
-        if (new_velocity.y > 0.0f)
+        if (bIsRun)
         {
+            this.run_speed += run_speed_add * Time.deltaTime;
+            this.run_speed = Mathf.Clamp(this.run_speed, 0.0f, PlayerControl.RUN_SPEED_MAX);
+            Vector3 new_velocity = this.GetComponent<Rigidbody>().velocity;
 
-            new_velocity.y = 0.0f;
+            new_velocity.x = run_speed;
+
+            if (new_velocity.y > 0.0f)
+            {
+
+                new_velocity.y = 0.0f;
+            }
+            this.GetComponent<Rigidbody>().velocity = new_velocity;
         }
-        this.GetComponent<Rigidbody>().velocity = new_velocity;
+        else
+        {
+            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+        
     }
 
    public void ReStart()

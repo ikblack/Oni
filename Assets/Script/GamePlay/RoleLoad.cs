@@ -63,7 +63,11 @@ public class RoleLoad : MonoBehaviour
             Player1.GetComponent<OniPlayerController>().enabled = false;
            
         }
-        TagMark.instance.ChangPlayer();
-        TagMark.instance.Player.GetComponent<OniPlayerController>().step = PLAYERSTEP.RUN;
+        if (TagMark.instance)
+        {
+            TagMark.instance.ChangPlayer();
+            TagMark.instance.Player.GetComponent<OniPlayerController>().step = PLAYERSTEP.RUN;
+        }
+       
     }
 }

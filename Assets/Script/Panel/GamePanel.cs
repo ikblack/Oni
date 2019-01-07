@@ -66,10 +66,11 @@ public class GamePanel :PanelBase
     {
         // Debug.Log("Start");
         GameObject.Find("Load").gameObject.GetComponent<AsyncLoadScene>().FinishLoad();
+       
     }
     public void OnFlash()
     {
-        TagMark.instance.Player.gameObject .GetComponent<OniPlayerController>().RUN_TEMP_SPEED = 4.0f;
+        TagMark.instance.Player.gameObject .GetComponent<OniPlayerController>().RUN_TEMP_SPEED = 5.0f;
         FlashButton.enabled = false;
         Invoke("OnFlashReset", Util.FlashCD);
     }
@@ -88,7 +89,8 @@ public class GamePanel :PanelBase
         GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
         GameController._gameInstance.RestartGame();
         TagMark.instance.Player.gameObject.GetComponent<OniPlayerController>().GetComponent<OniPlayerController>().step = PLAYERSTEP.STOP;
-       // Camera.main.gameObject.GetComponent<CameraControl>().enabled = false;
+        GameController._gameInstance.MonsterStop();
+        // Camera.main.gameObject.GetComponent<CameraControl>().enabled = false;
     }
     public void Show()
     {
@@ -124,6 +126,9 @@ public class GamePanel :PanelBase
         GameController._gameInstance.RestartGame();
         FadeControl.get().ui_image = StartMask;
         FadeControl.get().fade(1.0f, new Color(0.0f, 0.0f, 0.0f, 0.0f), new Color(0.0f, 0.0f, 0.0f, 1.0f));
+        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().Run();
+        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().step = PLAYERSTEP.STOP;
+       // GameController._gameInstance.MonsterStop();
         Invoke("Delay",1.25f);
 
     }
@@ -131,7 +136,15 @@ public class GamePanel :PanelBase
     {
         
         FadeControl.get().gameObject.SetActive(false);
+        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().run_speed = GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().run_oriSpeed;
         GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().step = PLAYERSTEP.RUN;
-         HideMask();
+        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().Run();
+        HideMask();
+        GameController._gameInstance.MonsterRun();
+    }
+    public void DelayRun()
+    {
+        GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().step = PLAYERSTEP.RUN;
+       
     }
 }

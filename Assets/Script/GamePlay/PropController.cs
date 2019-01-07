@@ -36,11 +36,12 @@ public class PropController : MonoBehaviour {
     {
 
         SpawnProp(mushroom);
-        Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+       
         //Debug.Log(Player.transform.localPosition.x);
     }
 	void Update () {
         // Debug.Log(Player.transform.localPosition.x);
+        Player = TagMark.instance.Player.gameObject;
         currentTime = Time.time;
         if (currentTime-lastTime>CD)
         {

@@ -166,7 +166,6 @@
     <Compile Include="Assets\Misc\Debug\ClipboardHelper.cs" />
     <Compile Include="Assets\Misc\Debug\DebugPrint.cs" />
     <Compile Include="Assets\Misc\Debug\DebugWindow.cs" />
-    <Compile Include="Assets\RoleLoad.cs" />
     <Compile Include="Assets\Script\AnimatedTextureExtendedUV.cs" />
     <Compile Include="Assets\Script\AttackColliderControl.cs" />
     <Compile Include="Assets\Script\AudioManager.cs" />
@@ -183,6 +182,8 @@
     <Compile Include="Assets\Script\GamePlay\OniPlayerController.cs" />
     <Compile Include="Assets\Script\GamePlay\Prop.cs" />
     <Compile Include="Assets\Script\GamePlay\PropController.cs" />
+    <Compile Include="Assets\Script\GamePlay\RoleLoad.cs" />
+    <Compile Include="Assets\Script\GamePlay\TagMark.cs" />
     <Compile Include="Assets\Script\GamePlay\TouchController.cs" />
     <Compile Include="Assets\Script\GamePlay\Util.cs" />
     <Compile Include="Assets\Script\GamePlay\WarningTrigger.cs" />

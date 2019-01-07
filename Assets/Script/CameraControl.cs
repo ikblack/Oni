@@ -12,7 +12,7 @@ public class CameraControl : MonoBehaviour {
 	void Start () {
 
         // 查找玩家地实例对象
-        //this.player = GameObject.FindGameObjectWithTag("Player");
+        this.player = GameObject.FindGameObjectWithTag("Player");
        
         Debug.Log(111);
 		this.offset = this.transform.position - this.player.transform.position;

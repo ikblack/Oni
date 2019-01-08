@@ -165,7 +165,15 @@ public class OniPlayerController : MonoBehaviour {
 
         //triggerJump.SetActive(true);
         //this.gameObject. GetComponent<CapsuleCollider>().enabled = false;
-        velocity.x = jump_weight;
+        if (this.run_speed> jump_weight)
+        {
+            velocity.x = run_speed;
+        }
+        else
+        {
+            velocity.x = jump_weight;
+        }
+       
         velocity.y = Mathf.Sqrt(MISS_GRAVITY * jump_height);
         velocity.z = 0.0f;
 
@@ -184,7 +192,9 @@ public class OniPlayerController : MonoBehaviour {
 
         if (other.gameObject.tag == "Enemy")
         {
+             animator.SetBool("IsRun", false);
             // DieBox.gameObject.SetActive(true);
+            /*animator.GetParameter(2)= false;*/
             this.step = PLAYERSTEP.DIE;
             //animator.SetTrigger("Die");
             GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().ShowMask();

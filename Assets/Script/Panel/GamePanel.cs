@@ -70,7 +70,7 @@ public class GamePanel :PanelBase
     }
     public void OnFlash()
     {
-        TagMark.instance.Player.gameObject .GetComponent<OniPlayerController>().RUN_TEMP_SPEED = 5.0f;
+        TagMark.instance.Player.gameObject .GetComponent<OniPlayerController>().RUN_TEMP_SPEED =Util.TempSpeed;
         FlashButton.enabled = false;
         Invoke("OnFlashReset", Util.FlashCD);
     }

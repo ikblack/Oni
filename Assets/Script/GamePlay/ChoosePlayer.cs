@@ -20,6 +20,7 @@ public class ChoosePlayer : MonoBehaviour {
     public void ShowPlayer(int index)
     {
         int j = index % players.Length;
+        Debug.Log(j);
         for (int i = 0; i < players.Length; i++)
         {
             if (i == j)

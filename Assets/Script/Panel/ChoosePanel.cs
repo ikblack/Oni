@@ -13,8 +13,8 @@ public class ChoosePanel : PanelBase {
     private Button retuenChooseBtn;
     private GameObject broad;
     private GameObject btn2Show;
-   
-    int index=1;
+    GameObject obj;
+    int index=0;
     #region 生命周期
     public override void Init(params object[] args)
     {
@@ -55,28 +55,51 @@ public class ChoosePanel : PanelBase {
     }
     public void OnStartClick()
     {
-        GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().Show();
+        AudioManager.instance.play("Bgm", 1f);
+        AudioManager.instance.isLoop(true);
+        if (GameObject.Find("Load"))
+        {
+            obj = GameObject.Find("Load").gameObject;
+        }
+        if (obj)
+        {
+            obj.GetComponent<AsyncLoadScene>().FinishLoad();
+        }
+        if (GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>())
+        {
+
+            GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().Show();
+        }
+        
         if (RoleLoad.instance)
         {
             RoleLoad.instance.Load();
             GameController._gameInstance.MonsterRun();
             //Camera.main.gameObject.GetComponent<CameraControl>().enabled = true;
         }
+       
         Close();
     }
     public void OnLastClick()
     {
-        ChoosePlayer.instance.ShowPlayer(index);
-        index--;
-        if (index<0)
+      
+       
+        if (index<=0)
         {
             index = 2;
         }
+        else
+        {
+            index--;
+        }
+        Debug.Log(index);
+        ChoosePlayer.instance.ShowPlayer(index);
     }
     public void OnNextClick()
     {
-        ChoosePlayer.instance.ShowPlayer(index);
         index++;
+        ChoosePlayer.instance.ShowPlayer(index);
+        Debug.Log(index);
     }
     public void OnBroardClick()
     {
@@ -89,6 +112,7 @@ public class ChoosePanel : PanelBase {
     public void OnReturnClick()
     {
         GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
+        //PanelMgr.instance.OpenPanel<StartPanel>("");
         ChoosePlayer.instance.HideAllPlayer();
         Close();
     }

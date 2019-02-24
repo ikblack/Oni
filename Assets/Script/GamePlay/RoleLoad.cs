@@ -32,6 +32,11 @@ public class RoleLoad : MonoBehaviour
             Player1.tag = "Player";
             Player2.tag = "OniYama";
             Player3.tag = "OniYama";
+            float y = Player1.gameObject.transform.localPosition.y;
+            float z = Player1.gameObject.transform.localPosition.z;
+            Player1.gameObject.transform.localPosition = new Vector3(0,y,z);
+            Player2.gameObject.transform.localPosition = new Vector3(0, y, z);
+            Player3.gameObject.transform.localPosition = new Vector3(0, y, z);
             Player1.GetComponent<OniPlayerController>().enabled = true;
             Player2.GetComponent<OniPlayerController>().enabled = false;
             Player3.GetComponent<OniPlayerController>().enabled = false;
@@ -45,6 +50,11 @@ public class RoleLoad : MonoBehaviour
             Player1.tag = "OniYama";
             Player2.tag = "Player";
             Player3.tag = "OniYama";
+            float y = Player1.gameObject.transform.localPosition.y;
+            float z = Player1.gameObject.transform.localPosition.z;
+            Player1.gameObject.transform.localPosition = new Vector3(0, y, z);
+            Player2.gameObject.transform.localPosition = new Vector3(0, y, z);
+            Player3.gameObject.transform.localPosition = new Vector3(0, y, z);
             Player2.GetComponent<OniPlayerController>().enabled = true;
             Player1.GetComponent<OniPlayerController>().enabled = false;
             Player3.GetComponent<OniPlayerController>().enabled = false;
@@ -58,6 +68,11 @@ public class RoleLoad : MonoBehaviour
             Player1.tag = "OniYama";
             Player2.tag = "OniYama";
             Player3.tag = "Player";
+            float y = Player1.gameObject.transform.localPosition.y;
+            float z = Player1.gameObject.transform.localPosition.z;
+            Player1.gameObject.transform.localPosition = new Vector3(0, y, z);
+            Player2.gameObject.transform.localPosition = new Vector3(0, y, z);
+            Player3.gameObject.transform.localPosition = new Vector3(0, y, z);
             Player3.GetComponent<OniPlayerController>().enabled = true;
             Player2.GetComponent<OniPlayerController>().enabled = false;
             Player1.GetComponent<OniPlayerController>().enabled = false;

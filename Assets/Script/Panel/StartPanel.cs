@@ -16,6 +16,7 @@ public class StartPanel : PanelBase
         base.Init(args);
         skinPath = "StartPanel";
         layer = PanelLayer.Panel;
+      
     }
 
     public override void OnShowing()
@@ -30,32 +31,40 @@ public class StartPanel : PanelBase
         {
             obj = GameObject.Find("Load").gameObject;
         }
-   
 
+        AudioManager.instance.play("Main",1f);
+        AudioManager.instance.isLoop(true);
+        
         startBtn.onClick.AddListener(OnStartClick);
-        shareBtn.onClick.AddListener(OnShareClick);
-        setBtn.onClick.AddListener(OnSetClick);
+       // shareBtn.onClick.AddListener(OnShareClick);
+        //setBtn.onClick.AddListener(OnSetClick);
     }
     #endregion
 
     public void OnStartClick()
     {
-        if (obj)
-        {
-            obj.GetComponent<AsyncLoadScene>().FinishLoad();
+          if (obj)
+          {
+            //  obj.GetComponent<AsyncLoadScene>().FinishLoad();
+     
         }
-        else
-        {
-            GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().Show();
-            startPanel.SetActive(false);
-        }
-        if (RoleLoad.instance)
-        {
-            RoleLoad.instance.Load();
-            GameController._gameInstance.MonsterRun();
-            //  Camera.main.gameObject.GetComponent<CameraControl>().enabled = true;
-        }
+          else
+          {
+            //  GameObject.FindWithTag("Canvas").gameObject.GetComponent<GamePanel>().Show();
+             // startPanel.SetActive(false);
+          }
 
+        startPanel.SetActive(false);
+       
+
+        //if (RoleLoad.instance)
+        //  {
+        //      RoleLoad.instance.Load();
+        //      GameController._gameInstance.MonsterRun();
+        //      // Camera.main.gameObject.GetComponent<CameraControl>().enabled = true;
+        //  }
+        PanelMgr.instance.OpenPanel<ChoosePanel>("");
+       
     }
 
     public void OnShareClick()
@@ -66,12 +75,14 @@ public class StartPanel : PanelBase
     }
     public void OnSetClick()
     {
-        // obj.GetComponent<AsyncLoadScene>().FinishLoad();
+        //obj.GetComponent<AsyncLoadScene>().FinishLoad();
         PanelMgr.instance.OpenPanel<ChoosePanel>("");
         startPanel.SetActive(false);
     }
    public void Show()
     {
         startPanel.SetActive(true);
+        AudioManager.instance.play("Main", 1f);
+        AudioManager.instance.isLoop(true);
     }
 }

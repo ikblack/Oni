@@ -12,8 +12,13 @@ public class GamePanel :PanelBase
     private Button RestartButton;
     private GameObject CanvasPanel;
     private GameObject MaskP;
+    private GameObject Img1;
+    private GameObject Img2;
+    private GameObject Img3;
     private Image StartMask;
     private Text Score;
+    private Text ScoreTipScore;
+    private Text RewardText;
     private float CurrentTimer;
     private float LastTimer;
     private float TimerVal;
@@ -37,7 +42,12 @@ public class GamePanel :PanelBase
         MaskP= skinTrans.Find("Mask").gameObject;
         RestartButton = skinTrans.Find("Mask/RestartBtn").GetComponent<Button>();
         StartMask = skinTrans.Find("StartMask").GetComponent<Image>();
+        ScoreTipScore= skinTrans.Find("Mask/ScoreTip/Text").GetComponent<Text>();
+        RewardText= skinTrans.Find("Mask/Reward/Text").GetComponent<Text>();
 
+        Img1 =skinTrans.Find("Score1").gameObject;
+        Img2 = skinTrans.Find("Score2").gameObject;
+        Img3= skinTrans.Find("Score3").gameObject;
 
         CanvasPanel.gameObject.SetActive(true);
         NotificationCenter.Get().AddEventListener("Score", ShowScore);
@@ -55,7 +65,29 @@ public class GamePanel :PanelBase
         if (Score)
         {
             Score.text = notification.param.ToString();
+            ScoreTipScore.text = Score.text;
+            RewardText.text = "0";
         }
+       int index= PlayerPrefs.GetInt("Role");
+        if (index==0)
+        {
+            Img1.gameObject.SetActive(true);
+            Img2.gameObject.SetActive(false);
+            Img3.gameObject.SetActive(false);
+        }
+        else if (index==1)
+        {
+            Img1.gameObject.SetActive(false);
+            Img2.gameObject.SetActive(true);
+            Img3.gameObject.SetActive(false);
+        }
+        else if (index==2)
+        {
+            Img1.gameObject.SetActive(false);
+            Img2.gameObject.SetActive(false);
+            Img3.gameObject.SetActive(true);
+        }
+
        
     }
     public void InitScore()
@@ -71,26 +103,41 @@ public class GamePanel :PanelBase
     public void OnFlash()
     {
         TagMark.instance.Player.gameObject .GetComponent<OniPlayerController>().RUN_TEMP_SPEED =Util.TempSpeed;
+        
+        if (FlashButton.enabled ==true)
+        {
+            Invoke("OnFlashReset", Util.FlashCD);
+        }
         FlashButton.enabled = false;
-        Invoke("OnFlashReset", Util.FlashCD);
     }
     public void OnRoll()
     {
         TagMark.instance.Player.gameObject.GetComponent<OniPlayerController>().bIsjump=true;
+        
+        if (RollButton.enabled ==true)
+        {
+            Invoke("OnRollReset", Util.RollCD);
+
+        }
         RollButton.enabled = false;
-        Invoke("OnRollReset",Util.RollCD);
     }
     public void OnReturn()
     {
         // Close();
         CanvasPanel.gameObject.SetActive(false);
-      
-        PanelMgr.instance.OpenPanel<StartPanel>("");
-        GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
+
+        // PanelMgr.instance.OpenPanel<StartPanel>("");
+        if (GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>())
+        {
+            GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
+        }
+        else
+            PanelMgr.instance.OpenPanel<StartPanel>("");
         GameController._gameInstance.RestartGame();
         TagMark.instance.Player.gameObject.GetComponent<OniPlayerController>().GetComponent<OniPlayerController>().step = PLAYERSTEP.STOP;
         GameController._gameInstance.MonsterStop();
         // Camera.main.gameObject.GetComponent<CameraControl>().enabled = false;
+        HideMask();
     }
     public void Show()
     {
@@ -100,6 +147,8 @@ public class GamePanel :PanelBase
     public void OnRollReset()
     {
         RollButton.enabled = true;
+        //TagMark.instance.Player.gameObject.GetComponent<OniPlayerController>().bisEnd = true;
+       // Debug.LogError("11");
     }
 
     public void OnFlashReset()
@@ -129,7 +178,7 @@ public class GamePanel :PanelBase
         GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().Run();
         GameObject.FindWithTag("Player").gameObject.GetComponent<OniPlayerController>().step = PLAYERSTEP.STOP;
        // GameController._gameInstance.MonsterStop();
-        Invoke("Delay",1.25f);
+        Invoke("Delay",2.5f);
 
     }
     public void Delay()

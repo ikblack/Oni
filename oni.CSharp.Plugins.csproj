@@ -75,8 +75,14 @@
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets\Plugins\LitJson.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\JSON\JSONObject.cs" />
+    <Compile Include="Assets\Plugins\JSON\JSONTemplates.cs" />
+    <Compile Include="Assets\Plugins\JSON\VectorTemplates.cs" />
     <Compile Include="Assets\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +98,7 @@
     <None Include="Assets\JMO Assets\Toony Colors\Shaders 2.0\Rim Lighting.shader" />
     <None Include="Assets\JMO Assets\Toony Colors\Shaders 2.0\Rim Outline.shader" />
     <None Include="Assets\Models\NewUnlitShader.shader" />
+    <None Include="Assets\Plugins\JSON\readme.txt" />
     <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />

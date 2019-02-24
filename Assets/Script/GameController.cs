@@ -36,11 +36,12 @@ public class GameController : MonoBehaviour
     public CameraControl cameraCon;
     public SceneControl sceneCon;
 
+    public PropController propController;
 
     public GameObject Monster;
     private GameObject Player;
-    
-   
+    public GameObject [] Players;
+    public bool bisDead;
     public void create()
     {
         // 为了在游戏开始后产生怪物，
@@ -55,18 +56,33 @@ public class GameController : MonoBehaviour
         // InitGame();
         // ShowInStart();
         //PasuGame();
+        if (GameObject.Find("Data")==null)
+        {
+            this.gameObject.AddComponent<LoadData>();
+        }
         Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+       
     }
 
 
     void Update()
     {
-        if (!Player)
-        {
-            Player = GameObject.FindGameObjectWithTag("Player").gameObject;
-        }
-    
-    
+        Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+        //if (!Player)
+        //{
+        //    // Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+        //    //foreach (GameObject item in Players)
+        //    //{
+        //    //    if (item.activeSelf==true)
+        //    //    {
+        //    //        Player = item.gameObject;
+        //    //    }
+        //    //}
+
+        //}
+        bisDead = Player.GetComponent<OniPlayerController>().Isdie();
+
+
     }
     public void InitGame()
     {
@@ -84,6 +100,8 @@ public class GameController : MonoBehaviour
 
     public void RestartGame()
     {
+        AudioManager.instance.bisPlayOnce = false;
+        propController.GetComponent<PropController>().DestroyMonster();
         Player.GetComponent<OniPlayerController>().InitPlayerState();
         foreach (FloorControl item in floors)
         {
@@ -96,22 +114,38 @@ public class GameController : MonoBehaviour
             {
                 Destroy(item);
             }
-            if (item.GetComponent<Monster>()&&item.GetComponent<Monster>().eType == EType.ENEMY)
-            {
-                item.GetComponent<Monster>().ReStart();
-            }
+            //if (item.GetComponent<Monster>() && item.GetComponent<Monster>().eType == EType.ENEMY)
+            //{
+            //    item.GetComponent<Monster>().ReStart();
+            //}
         }
         Monster.GetComponent<Monster>(). ReStart();
         Player.GetComponent<OniPlayerController>().Run();
+        float y = Player.transform.localPosition.y;
+        float z = Player.transform.localPosition.z;
+        if (Player.transform.localPosition.x>5)
+        {
+            Player.transform.localPosition = new Vector3(0, y, z);
+        }
     }
 
     public void MonsterStop()
     {
+       
         Monster.GetComponent<Monster>().bIsRun = false;
+        foreach (GameObject item in propController.monsterlist)
+        {
+            item.GetComponent<Monster>().bIsRun = false;
+        }
+        
     }
     public void MonsterRun()
     {
         Monster.GetComponent<Monster>().bIsRun = true;
+        //foreach (GameObject item in propController.monsterlist)
+        //{
+        //    item.GetComponent<Monster>().bIsRun = true;
+        //}
     }
     public void StartGame()
     {

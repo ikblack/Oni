@@ -19,16 +19,16 @@ public class SharePanel : PanelBase {
     {
         base.OnShowing();
         Transform skinTrans = skin.transform;
-        sharePanel = skin.transform.gameObject;
-        returnBut = skin.transform.Find("ShareBut").GetComponent<Button>();
-     //   sharePanel.SetActive(false);
-        returnBut.onClick.AddListener(Return);
+      //  sharePanel = skin.transform.gameObject;
+     //  returnBut = skin.transform.Find("ShareBut").GetComponent<Button>();
+     //  sharePanel.SetActive(false);
+     //  returnBut.onClick.AddListener(Return);
     }
     #endregion
 
     public void Return()
     {
-        GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
+      //  GameObject.FindWithTag("Canvas").gameObject.GetComponent<StartPanel>().Show();
         Close();
      //   sharePanel.SetActive(false);
      

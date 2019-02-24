@@ -5,11 +5,12 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour {
    
     public static AudioManager instance;
+    public bool bisPlayOnce;
     void Start () {
         instance = this;
-        play("BGM",1f);
-        isLoop(true);
-
+        //play("Main",1f);
+        //isLoop(true);
+        DontDestroyOnLoad(this);
     }
 
     public void isLoop(bool isloop) {

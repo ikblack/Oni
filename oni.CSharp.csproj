@@ -75,6 +75,9 @@
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets\Plugins\LitJson.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-UnityScript-firstpass">
       <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
     </Reference>
@@ -166,6 +169,7 @@
     <Compile Include="Assets\Misc\Debug\ClipboardHelper.cs" />
     <Compile Include="Assets\Misc\Debug\DebugPrint.cs" />
     <Compile Include="Assets\Misc\Debug\DebugWindow.cs" />
+    <Compile Include="Assets\MonsterSpawn.cs" />
     <Compile Include="Assets\Script\AnimatedTextureExtendedUV.cs" />
     <Compile Include="Assets\Script\AttackColliderControl.cs" />
     <Compile Include="Assets\Script\AudioManager.cs" />
@@ -176,13 +180,16 @@
     <Compile Include="Assets\Script\GameController.cs" />
     <Compile Include="Assets\Script\GamePlay\AttackTrigger.cs" />
     <Compile Include="Assets\Script\GamePlay\ChoosePlayer.cs" />
+    <Compile Include="Assets\Script\GamePlay\Data.cs" />
     <Compile Include="Assets\Script\GamePlay\LoadData.cs" />
     <Compile Include="Assets\Script\GamePlay\Monster.cs" />
     <Compile Include="Assets\Script\GamePlay\Mushroom.cs" />
     <Compile Include="Assets\Script\GamePlay\OniPlayerController.cs" />
     <Compile Include="Assets\Script\GamePlay\Prop.cs" />
     <Compile Include="Assets\Script\GamePlay\PropController.cs" />
+    <Compile Include="Assets\Script\GamePlay\QuitSet.cs" />
     <Compile Include="Assets\Script\GamePlay\RoleLoad.cs" />
+    <Compile Include="Assets\Script\GamePlay\SaveTool.cs" />
     <Compile Include="Assets\Script\GamePlay\TagMark.cs" />
     <Compile Include="Assets\Script\GamePlay\TouchController.cs" />
     <Compile Include="Assets\Script\GamePlay\Util.cs" />
@@ -232,6 +239,7 @@
     <None Include="Assets\JMO Assets\Toony Colors\Shaders 2.0\Rim Lighting.shader" />
     <None Include="Assets\JMO Assets\Toony Colors\Shaders 2.0\Rim Outline.shader" />
     <None Include="Assets\Models\NewUnlitShader.shader" />
+    <None Include="Assets\Plugins\JSON\readme.txt" />
     <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />

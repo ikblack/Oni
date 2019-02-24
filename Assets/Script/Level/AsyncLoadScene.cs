@@ -16,12 +16,14 @@ public class AsyncLoadScene : MonoBehaviour {
     private AsyncOperation operation;
     public GameObject[] img;
     public GameObject ImgLoading;
+    public GameObject LoadImg;
     private int index;
     private int RecInt=1;
     float time;
     float newtime;
     bool bIsFinish;
     public float setTime=10;
+
     // Use this for initialization
     void Start () {
       //  PanelMgr.instance.OpenPanel<SharePanel>("");
@@ -101,7 +103,9 @@ public class AsyncLoadScene : MonoBehaviour {
                 img[i].SetActive(false);
                 ImgLoading.SetActive(false);
                 PanelMgr.instance.OpenPanel<StartPanel>("");
+               
             }
+            LoadImg.gameObject.SetActive(false);
         }
 
     }

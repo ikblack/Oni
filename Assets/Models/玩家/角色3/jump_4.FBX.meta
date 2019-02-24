@@ -298,8 +298,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.6015587
+      - time: 0.1422091
         functionName: OnCapDown
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.19513275
+        functionName: RollEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
